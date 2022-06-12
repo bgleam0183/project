@@ -1,60 +1,10 @@
-* {
-    margin: 0;
-    padding: 0;
-    font-family: sans-serif;
-    box-sizing: border-box;
-}
-
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-}
-
-.calender {
-    width: 600px;
-    margin: 50px;
-}
-
-.header1 {
+.header {
     display: flex;
     align-items: left;
+    font-weight: 500;
 }
-.header2 {
-    display: flex;
-    align-items: right;
-}
-
 .yearmonth {
-    font-size: 35px;
-}
-
-.nav {
-    
-    border: 1px solid #333333;
-    border-radius: 5px;
-}
-
-.navbtn {
-    width: 28px;
-    height: 30px;
-    border: 16px;
-    font-size: 16px;
-    background-color: transparent;
-    cursor: pointer;
-}
-
-.gotoday {
-    height: 30px;
-    border: 16px;
-    font-size: 16px;
-    font-weight: bold;
-    background-color: transparent;
-    cursor: pointer;
-    width: 75px;
-    border-left: 1px solid #333333;
-    border-right: 1px solid #333333;
+    font-size: 40px;
 }
 
 .days {
@@ -96,3 +46,5 @@ body {
 .date:nth-child(7n) {
     color: rgb(87, 87, 228);
 }
+
+

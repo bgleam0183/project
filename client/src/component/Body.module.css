@@ -11,16 +11,31 @@ body {
     align-items: center;
     min-height: 100vh;
 }
+.h1 {
+    text-align: center;
+    background-color: #26a69a;
+    color: white;
+    height: 100px;
+    line-height: 185%;
+    font-size: 60px;
+    font-weight :500;
+    margin-bottom: 50px;
+    border-radius: 25px;
+}
+h1 {
+    text-align: center;
+    font-size: 60px;
+    font-weight :500;
+}
 
 .calender {
-    width: 600px;
+    width: 700px;
     margin: 50px;
 }
 
 .header {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: right;
 }
 
 .yearmonth {
@@ -53,43 +68,9 @@ body {
     border-left: 1px solid #333333;
     border-right: 1px solid #333333;
 }
-
-.days {
-    display: flex;
-    margin: 25px 0 10px;
-    font-weight: bold;
+.todays{
+    display: flexbox;
+    font-size: 19px;
+    margin : 15px 0 13px 560px;
 }
 
-.day {
-    width: calc(100% / 7);
-    text-align: center;
-}
-
-.dates {
-    display: flex;
-    flex-flow: row wrap;
-    height: 500px;
-    font-weight: bold;
-    border-top: 1px solid #333333;
-    border-right: 1px solid #333333;
-}
-
-.date {
-    width: calc(100% / 7);
-    padding: 15px;
-    font-weight: bold;
-    text-align: right;
-    line-height: 15px;
-    border-bottom: 1px solid #333333;
-    border-left: 1px solid #333333;
-}
-
-.day:nth-child(7n + 1),
-.date:nth-child(7n + 1) {
-    color: crimson;
-}
-
-.day:nth-child(7n),
-.date:nth-child(7n) {
-    color: rgb(87, 87, 228);
-}

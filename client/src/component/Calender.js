@@ -1,11 +1,11 @@
-import styles from './Calender.module.css';import { useNavigate } from "react-router-dom";
+import styles from './Calender.module.css';
+import { useNavigate } from "react-router-dom";
  function Calender(props) {
 
 
         let navigate = useNavigate();
         const date = new Date()
         date.setMonth(props.month)
-
         
         let viewYear = date.getFullYear();
         let viewMonth = date.getMonth();
@@ -27,18 +27,25 @@ import styles from './Calender.module.css';import { useNavigate } from "react-ro
             nextDates.push(i);
         }
         let dates = prevDates.concat(thisDates, nextDates);
-        
+        const firstDateIndex = dates.indexOf(1);
+        const lastDateIndex = dates.lastIndexOf(TLDate);
 
          dates.forEach((data, i) => {
-                    function log() {
+                    function golist() {
                         navigate('/list', { state : {
                             month : date.getMonth() + 1,
                             day : data
                         }});
                     }
-                    dates[i] = <div className={styles.date} key={i} onClick={log}
-                   >{data}</div>;
-            })
+
+                    const condition = i >= firstDateIndex && i < lastDateIndex + 1 ? 'this' : 'other';
+
+                    dates[i] = <div className={styles.date} key={i} onClick={golist}
+                    ><span className={condition}>{data}</span></div>;
+
+                    
+}
+            )
         
                 
                 
