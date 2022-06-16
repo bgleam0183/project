@@ -1,13 +1,14 @@
 const mongoose = require('mongoose');
 var autoIncrement = require('mongoose-auto-increment');
 autoIncrement.initialize(mongoose.connection);
-// Define Schemes
+// Define Schemes ref 뭔가 안 먹는 느낌이라 folderSchema 통제거
 const wordSchema = new mongoose.Schema({
   id: { type: Number, required: true, default: 0 },
   month: { type: Number, required: true },
   day: { type: Number, required: true },
   word: { type: String, required: true },
-  mean: { type: String, required: true }
+  mean: { type: String, required: true },
+  folder: { type: String, required: false, default: "", ref: 'Folder' }
 }
 ,
 { collection: 'word' }
@@ -15,6 +16,12 @@ const wordSchema = new mongoose.Schema({
 {
   timestamps: true
 });
+
+const folderSchema = new mongoose.Schema({
+  month: { type: Number, required: true },
+  day: { type: Number, required: true },
+  name: { type: String, required: true }
+}, { collection: 'folder'}, { timestamps: true });
 
 wordSchema.plugin(autoIncrement.plugin, {
   model: 'Word',
@@ -57,4 +64,5 @@ wordSchema.statics.create = function (payload) {
 
 
 // Create Model & Export
+module.exports = mongoose.model('Folder', folderSchema);
 module.exports = mongoose.model('Word', wordSchema);

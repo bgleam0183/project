@@ -12,7 +12,8 @@ function Wordlist() {
         month: '',
         day: '',
         word: '',
-        mean: ''
+        mean: '',
+        folder: ''
       }])
 
     function goBack () {
@@ -52,7 +53,8 @@ function Wordlist() {
                   month : Data.month,
                   day : Data.day,
                   word : Data.word,
-                  mean : Data.mean
+                  mean : Data.mean,
+                  folder : Data.folder
           }
           ))
           setList(inputData);
@@ -60,10 +62,14 @@ function Wordlist() {
       }
       LandingPage();
       })
-    console.log(List);
-
+      console.log(List);
+    // console.log(location.state);
+      
+    const Foli = List.filter(pro => pro.month === month && pro.day === day && pro.folder !== "").map((pro) => (
+        <Word mean = {"폴더"} folder = {pro.folder} id = {pro.id} key={pro.id} month={pro.month} day={pro.day} />
+    ));
     
-    const List2 = List.filter(pro => pro.month === month && pro.day === day).map((pro) => (
+    const List2 = List.filter(pro => pro.month === month && pro.day === day && pro.folder === "").map((pro) => (
         <Word mean = {pro.mean} word = {pro.word} id = {pro.id} key={pro.id}/>
     ));
 
@@ -72,7 +78,7 @@ function Wordlist() {
     return(
       <div className={styles.container}>
           <div  className={styles.goback}onClick={goBack}>
-            Main
+            뒤로가기
         </div>
           <h1>{month}월{day}일 단어 목록</h1>
           <button className={styles.add} onClick={goInsert}>단어 추가</button>
@@ -83,6 +89,7 @@ function Wordlist() {
                 <span>
                 수정 / 삭제</span>
             </div>
+            {Foli}
             {List2}
             
         </div>

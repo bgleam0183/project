@@ -6,12 +6,19 @@ export default function Insert() {
 
     const [Word, setWord] = useState();
     const [Mean, setMean] = useState();
+    const [Folder, setFolder] = useState("");
+
     const onMeanHandler = (e) => {
         setMean(e.currentTarget.value);
     }
     const onWordHandler = (e) => {
         setWord(e.currentTarget.value);
     }
+    const onFolderHandler = (e) => {
+        setFolder(e.currentTarget.value);
+    }
+
+
     const navigate = useNavigate();
     const location = useLocation();
     let Month;
@@ -36,21 +43,36 @@ export default function Insert() {
         let day = Day;
         let word = Word;
         let mean = Mean;
+        let folder = Folder;
 
-        let acclist = [Word, Mean];
+        let acclist = [Word, Mean, Folder];
+        
+        var reg = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/g;
+
         for (let i = 0; i < acclist.length; i++) {  
-            if (!acclist[i])
+            if (!acclist[i] && i != 2)
             {
                 alert("빈칸 없이 작성해주세요");
                 return false;
             }
+
+            if ( acclist[i].match(reg) != null ) {
+                alert("특수기호 없이 폴더명만 기입바랍니다.");
+                return false;
+            }
+            if(i == acclist.length) {
+                return false;
+            }
         }
+        
+        
 
         let content = {
             month,
             day,
             word,
-            mean
+            mean,
+            folder
         }
 
         var response = await fetch('/insert', {
@@ -76,6 +98,7 @@ export default function Insert() {
                        단어 추가
                    </h1>
                 </div>
+                    <input type="text" id="folder" className={styles.input} onChange={onFolderHandler} placeholder="폴더명" />
                     <input type="text" id="word" className={styles.input}
                     onChange={onWordHandler}placeholder="단어"  />
                     <input type="text" id="mean" className={styles.input} onChange={onMeanHandler} placeholder="뜻"  />
