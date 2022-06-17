@@ -5,7 +5,10 @@ import Calender from './Calender';
 
 
 function Body() {
+    // 날짜 관리를 위한 변수 생성
     const [date, setDate] = useState(new Date());
+
+    // Recent Word에 출력할 데이터 담을 변수 생성
     const [List, setList] = useState([{
         id: '',
         month: '',
@@ -17,15 +20,18 @@ function Body() {
     
     const today = new Date();
 
+    // 실시간으로 계속 추가된 데이터나 수정된 데이터 업데이트 할 수 있도록 useEffect 함수 활용
     useEffect(() => {
         async function LandingPage() {
-            //get request를 서버에 보내는 것
+            // GET 메소드로 request를 서버에 전송
             var response = await fetch('/select', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
                 },
             });
+
+            // text 형식으로 전달된 데이터(실제로는 JSON)를 다시 JSOn 형태로 변경
             var body = await response.text();
             body = JSON.parse(body);
             const inputData = body.map((Data) => ({
@@ -63,11 +69,16 @@ function Body() {
         console.log(date.getMonth());
     };
 
+    /**
+     * Recent Word 출력을 위해 서버에서 받아온 전체 데이터를 필터링
+     * getDate()에서 8을 뺀 이유는 예를 들어 금요일 기준 지난 금요일을 포함하여 출력하기 위함
+     */
     var List2 = List.filter((pro) => pro.month === today.getMonth()+1 && pro.day > today.getDate()-8
      && pro.day <= today.getDate()).map((pro) => (
         <Word mean = {pro.mean} word = {pro.word} id = {pro.id} key={pro.id} folder={pro.folder}/>
     ));
 
+    // 필터링에 해당되는 데이터가 없는 경우 대체 메시지 출력
     if(List2.length === 0) {
         List2 = "최근 1주일 간 추가된 단어가 없습니다.";
     }

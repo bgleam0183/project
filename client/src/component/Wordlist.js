@@ -7,7 +7,7 @@ function Wordlist() {
     const location = useLocation();
     let month;
     let day;
-    let locFolder;
+    let locFolder;      // 이 변수에 저장된 폴더명과 폴더명이 동일한 데이터만 출력하기 위함 (폴더에 들어간 효과)
     const [List, setList] = useState([{
         id: '',
         month: '',
@@ -45,7 +45,7 @@ function Wordlist() {
 
     useEffect(() => {
         async function LandingPage() {
-            //get request를 서버에 보내는 것
+            // GET 메소드로 request를 서버에 전송
             var response = await fetch('/select', {
               method: 'GET',
               headers: {
@@ -68,16 +68,25 @@ function Wordlist() {
       }
       LandingPage();
       })
-    //   console.log(List);
-    // console.log(location.state);
-      
+
+
+    /**
+     * Word 컴포넌트에서 폴더를 클릭했을 경우. 해당 컴포넌트의 폴더명을 담아 리렌더링하는데 그 폴더명이
+     * location.state.folder에 담겨있다.
+     * 최상위 폴더에서만 해당 값이 undefined인 상태이기 때문에 location.state.folder가 undefined인 경우에만 폴더로 Word 컴포넌트를 생성한다.
+     */
     const Foli = List.filter(pro => pro.month === month && pro.day === day && pro.folder !== "" && location.state.folder == undefined).map((pro) => (
         <Word mean = {"폴더"} folder = {pro.folder} id = {pro.id} key={pro.id} month={pro.month} day={pro.day} />
     ));
     
 
+    /**
+     *  데이터마다 폴더명이 저장되어 있는데 new folder라는 값을 가진 데이터가 2개인 경우 같은 폴더를 두 번 출력한다.
+     * 따라서 데이터의 folder 값을 valArr에 담고 중복되는 값인 경우에는 valArrIdx에 index를 넣고 후에 splice로 처리한다.
+     */
     var valArr = [];
     var valArrIdx = [];
+
     // 폴더 중복 제거
     Foli.map((pro, idx) => {
         if(valArr.indexOf(pro.props.folder) === -1) {
@@ -94,6 +103,8 @@ function Wordlist() {
     if(locFolder === undefined) {
         locFolder = "";
     }
+
+    // 현재 폴더명과 일치하는 데이터만 필터링
     const List2 = List.filter(pro => pro.month === month && pro.day === day && pro.folder === locFolder).map((pro) => (
         <Word mean = {pro.mean} word = {pro.word} id = {pro.id} key={pro.id} folder={pro.folder}/>
     ));

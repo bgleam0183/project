@@ -5,6 +5,7 @@ function Word (props) {
      
     const navigation = useNavigate();
 
+    // 수정 시 이전 폴더명을 나타내기 위해 folder를 db제어를 위해 id 전달
     function goUpdate () {
         navigation('/update', {state : {
             id : props.id,
@@ -19,7 +20,7 @@ function Word (props) {
         };
 
         
-
+        // 데이터를 전환하여 전달
         var response = await fetch('/delete', {
             method: 'POST',
             headers: {
@@ -42,6 +43,7 @@ function Word (props) {
         }});
     }
 
+    // Wordlist.js에서 mean={"폴더"}로 하드코딩 된 것은 단어와 다른 컴포넌트 형태로 출력하기 위해 제어
     if(props.mean === "폴더") {
         return (
             <div className={styles.word}>
