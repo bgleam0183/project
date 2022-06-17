@@ -102,11 +102,9 @@ function Wordlist() {
 
     return(
       <div className={styles.container}>
-          <div  className={styles.goback}onClick={goBack}>
-            뒤로가기
-        </div>
           <h1>{month}월{day}일 단어 목록</h1>
           <div>
+            <button className={styles.goback} onClick={goBack}>뒤로가기</button>
             <button className={styles.home} onClick={goHome}>홈으로</button>
             <button className={styles.add} onClick={goInsert}>단어 추가</button>
           </div>

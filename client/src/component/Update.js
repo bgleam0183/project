@@ -85,6 +85,10 @@ export default function Update() {
 
         var reg = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/g;
 
+        if(Folder === undefined) {
+            setFolder("");
+        }
+
         let acclist = [Word, Mean, Folder];
         for (let i = 0; i < acclist.length; i++) {  
             if (!acclist[i] && i != 2)
