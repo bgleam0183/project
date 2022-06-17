@@ -87,7 +87,7 @@ export default function Update() {
 
         let acclist = [Word, Mean, Folder];
         for (let i = 0; i < acclist.length; i++) {  
-            if (!acclist[i])
+            if (!acclist[i] && i != 2)
             {
                 alert("빈칸 없이 작성해주세요");
                 return false;

@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 var autoIncrement = require('mongoose-auto-increment');
 autoIncrement.initialize(mongoose.connection);
-// Define Schemes ref 뭔가 안 먹는 느낌이라 folderSchema 통제거
 const wordSchema = new mongoose.Schema({
   id: { type: Number, required: true, default: 0 },
   month: { type: Number, required: true },
