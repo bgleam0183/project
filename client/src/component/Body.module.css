@@ -33,6 +33,11 @@ h1 {
     margin: 50px;
 }
 
+.recentWord {
+    width: 700px;
+    margin: 50px;
+}
+
 .header {
     display: flex;
     justify-content: right;
@@ -72,5 +77,10 @@ h1 {
     display: flexbox;
     font-size: 19px;
     margin : 15px 0 13px 560px;
+}
+
+.recent {
+    font-size: 30px;
+    margin-bottom: 3%;
 }
 
