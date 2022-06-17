@@ -43,9 +43,10 @@ function Word (props) {
 
     if(props.mean === "폴더") {
         return (
-            <div className={styles.word} onClick={folderClick}>
+            <div className={styles.word}>
                 <span>{props.folder}</span>
                 <span>{props.mean}</span>
+                <span><button className={styles.folder} onClick={folderClick}>이동</button></span>
             </div>
         )
     }
