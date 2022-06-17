@@ -31,3 +31,13 @@ span {
         border-radius: 10px;
         font-size: 22px;
 }
+
+.folder {
+    color: white;
+    background-color: #51f542;
+    border-style: none;
+    width: 80px;
+    height: 45px;
+    border-radius: 10px;
+    font-size: 22px;
+}

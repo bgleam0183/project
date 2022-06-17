@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
 var autoIncrement = require('mongoose-auto-increment');
 autoIncrement.initialize(mongoose.connection);
-// Define Schemes
 const wordSchema = new mongoose.Schema({
   id: { type: Number, required: true, default: 0 },
   month: { type: Number, required: true },
   day: { type: Number, required: true },
   word: { type: String, required: true },
-  mean: { type: String, required: true }
+  mean: { type: String, required: true },
+  folder: { type: String, required: false, default: "" }
 }
 ,
 { collection: 'word' }
