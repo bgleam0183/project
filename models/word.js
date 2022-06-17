@@ -8,7 +8,7 @@ const wordSchema = new mongoose.Schema({
   day: { type: Number, required: true },
   word: { type: String, required: true },
   mean: { type: String, required: true },
-  folder: { type: String, required: false, default: "", ref: 'Folder' }
+  folder: { type: String, required: false, default: "" }
 }
 ,
 { collection: 'word' }
@@ -16,12 +16,6 @@ const wordSchema = new mongoose.Schema({
 {
   timestamps: true
 });
-
-const folderSchema = new mongoose.Schema({
-  month: { type: Number, required: true },
-  day: { type: Number, required: true },
-  name: { type: String, required: true }
-}, { collection: 'folder'}, { timestamps: true });
 
 wordSchema.plugin(autoIncrement.plugin, {
   model: 'Word',
@@ -64,5 +58,4 @@ wordSchema.statics.create = function (payload) {
 
 
 // Create Model & Export
-module.exports = mongoose.model('Folder', folderSchema);
 module.exports = mongoose.model('Word', wordSchema);
