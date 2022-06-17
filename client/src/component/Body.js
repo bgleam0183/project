@@ -63,10 +63,14 @@ function Body() {
         console.log(date.getMonth());
     };
 
-    const List2 = List.filter((pro) => pro.month === today.getMonth()+1 && pro.day > today.getDate()-7
+    var List2 = List.filter((pro) => pro.month === today.getMonth()+1 && pro.day > today.getDate()-8
      && pro.day <= today.getDate()).map((pro) => (
         <Word mean = {pro.mean} word = {pro.word} id = {pro.id} key={pro.id} folder={pro.folder}/>
     ));
+
+    if(List2.length === 0) {
+        List2 = "최근 1주일 간 추가된 단어가 없습니다.";
+    }
 
         return (
             <>
