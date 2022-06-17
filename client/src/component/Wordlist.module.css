@@ -25,6 +25,19 @@ h1 {
     line-height: 100%;
 }
 
+.home {
+    width: 130px;
+    height: 50px;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    background-color: rgba(38, 126, 26, 0.7);
+    border-style: none;
+    border-radius: 15px;
+    margin: 4% 0 3% 0;
+    margin-right: 2%;
+}
+
 .add {
     width: 130px;
     height: 50px;

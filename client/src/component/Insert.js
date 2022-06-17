@@ -57,7 +57,7 @@ export default function Insert() {
             }
 
             if ( acclist[i].match(reg) != null ) {
-                alert("특수기호 없이 폴더명만 기입바랍니다.");
+                alert("폴더명에는 특수기호 입력이 불가합니다.");
                 return false;
             }
             if(i == acclist.length) {
@@ -90,6 +90,11 @@ export default function Insert() {
         alert(month + "월"+ day + "일에 단어가 추가되었습니다.");
         navigate(-1);
     }
+
+    function cancel() {
+        navigate(-1);
+    }
+    
         return(
             <div className={styles.back}>
                 <div className={styles.login}>
@@ -104,6 +109,9 @@ export default function Insert() {
                     <input type="text" id="mean" className={styles.input} onChange={onMeanHandler} placeholder="뜻"  />
                     <button className={styles.btn} onClick={submit}>
                         추가
+                    </button>
+                    <button className={styles.btn} onClick={cancel}>
+                        취소
                     </button>
                 </div>
             </div>

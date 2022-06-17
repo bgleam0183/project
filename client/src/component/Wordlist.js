@@ -17,6 +17,10 @@ function Wordlist() {
         folder: ''
       }])
 
+    function goHome() {
+        navigate('/');
+    }
+
     function goBack () {
         navigate(-1);
     }
@@ -74,6 +78,7 @@ function Wordlist() {
 
     var valArr = [];
     var valArrIdx = [];
+    // 폴더 중복 제거
     Foli.map((pro, idx) => {
         if(valArr.indexOf(pro.props.folder) === -1) {
             valArr.push(pro.props.folder);
@@ -90,7 +95,7 @@ function Wordlist() {
         locFolder = "";
     }
     const List2 = List.filter(pro => pro.month === month && pro.day === day && pro.folder === locFolder).map((pro) => (
-        <Word mean = {pro.mean} word = {pro.word} id = {pro.id} key={pro.id}/>
+        <Word mean = {pro.mean} word = {pro.word} id = {pro.id} key={pro.id} folder={pro.folder}/>
     ));
 
 
@@ -101,7 +106,10 @@ function Wordlist() {
             뒤로가기
         </div>
           <h1>{month}월{day}일 단어 목록</h1>
-          <button className={styles.add} onClick={goInsert}>단어 추가</button>
+          <div>
+            <button className={styles.home} onClick={goHome}>홈으로</button>
+            <button className={styles.add} onClick={goInsert}>단어 추가</button>
+          </div>
         <div className={styles.wordcontainer}>
             <div className={styles.cate}>
                 <span>단어</span>

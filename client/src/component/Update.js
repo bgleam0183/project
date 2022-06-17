@@ -6,13 +6,19 @@ export default function Update() {
 
     const [Word, setWord] = useState();
     const [Mean, setMean] = useState();
+    const [Folder, setFolder] = useState();
     const [List, setList] = useState([{
         id: '',
         month: '',
         day: '',
         word: '',
-        mean: ''
+        mean: '',
+        folder: ''
       }])
+    const onFoldHandler = (e) => {
+        setFolder(e.currentTarget.value);
+    }
+
     const onMeanHandler = (e) => {
         setMean(e.currentTarget.value);
     }
@@ -22,10 +28,11 @@ export default function Update() {
     const navigate = useNavigate();
     const location = useLocation();
     let Id;
-
+    let prev;
     if (location.state !== 'undefined' && location.state !== null)
     {
        Id = location.state.id;
+       prev = location.state.folder;
     }
     else
     {
@@ -70,14 +77,24 @@ export default function Update() {
         let id = Id;
         let word = Word;
         let mean = Mean;
+        let folder = Folder;
         let month = Thisword.month;
         let day = Thisword.day;
 
-        let acclist = [Word, Mean];
+        let back = -1;
+
+        var reg = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/g;
+
+        let acclist = [Word, Mean, Folder];
         for (let i = 0; i < acclist.length; i++) {  
             if (!acclist[i])
             {
                 alert("빈칸 없이 작성해주세요");
+                return false;
+            }
+
+            if ( acclist[i].match(reg) != null ) {
+                alert("폴더명에는 특수기호 입력이 불가합니다.");
                 return false;
             }
         }
@@ -87,7 +104,8 @@ export default function Update() {
             month,
             day,
             word,
-            mean
+            mean,
+            folder
         }
         var response = await fetch('/update', {
             method: 'PUT',
@@ -100,6 +118,13 @@ export default function Update() {
         body = JSON.parse(body);
         console.log(body);
         alert("단어를 수정했습니다.");
+        if(prev !== folder) {
+            back = -2;
+        }
+        navigate(back);
+    }
+
+    function cancel() {
         navigate(-1);
     }
 
@@ -111,11 +136,15 @@ export default function Update() {
                        단어 수정
                    </h1>
                 </div>
+                    <input type="text" id="mean" className={styles.input} onChange={onFoldHandler} placeholder={"현재폴더명 \""+prev+"\""}/>
                     <input type="text" id="word" className={styles.input}
                     onChange={onWordHandler} placeholder={"단어"}    />
                     <input type="text" id="mean" className={styles.input} onChange={onMeanHandler} placeholder={"뜻"}/>
                     <button className={styles.btn} onClick={submit}>
                         수정
+                    </button>
+                    <button className={styles.btn} onClick={cancel}>
+                        취소
                     </button>
                 </div>
             </div>

@@ -7,7 +7,8 @@ function Word (props) {
 
     function goUpdate () {
         navigation('/update', {state : {
-            id : props.id
+            id : props.id,
+            folder : props.folder
         }});
     }
 
