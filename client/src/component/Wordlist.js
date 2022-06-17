@@ -7,6 +7,7 @@ function Wordlist() {
     const location = useLocation();
     let month;
     let day;
+    let locFolder;
     const [List, setList] = useState([{
         id: '',
         month: '',
@@ -30,6 +31,7 @@ function Wordlist() {
     {
        month = location.state.month;
        day = location.state.day;
+       locFolder = location.state.folder;
     }
     else
     {
@@ -62,14 +64,32 @@ function Wordlist() {
       }
       LandingPage();
       })
-      console.log(List);
+    //   console.log(List);
     // console.log(location.state);
       
-    const Foli = List.filter(pro => pro.month === month && pro.day === day && pro.folder !== "").map((pro) => (
+    const Foli = List.filter(pro => pro.month === month && pro.day === day && pro.folder !== "" && location.state.folder == undefined).map((pro) => (
         <Word mean = {"폴더"} folder = {pro.folder} id = {pro.id} key={pro.id} month={pro.month} day={pro.day} />
     ));
     
-    const List2 = List.filter(pro => pro.month === month && pro.day === day && pro.folder === "").map((pro) => (
+
+    var valArr = [];
+    var valArrIdx = [];
+    Foli.map((pro, idx) => {
+        if(valArr.indexOf(pro.props.folder) === -1) {
+            valArr.push(pro.props.folder);
+        } else {
+            valArrIdx.push(idx);
+        }
+    });
+
+    valArrIdx.forEach(idx => {
+        Foli.splice(idx, 1);
+    });
+
+    if(locFolder === undefined) {
+        locFolder = "";
+    }
+    const List2 = List.filter(pro => pro.month === month && pro.day === day && pro.folder === locFolder).map((pro) => (
         <Word mean = {pro.mean} word = {pro.word} id = {pro.id} key={pro.id}/>
     ));
 
